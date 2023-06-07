@@ -25,7 +25,7 @@ export default function SignInPage() {
         event.preventDefault();
 
         const promise = axios.post('https://mock-api.driven.com.br/api/v4/driven-plus/auth/sign-up', userInfo);
-        promise.then(p => {navigate('/')});
+        promise.then(p => {navigate("/")});
         promise.catch(p => {alert(p.response.data.message)});
     }
 

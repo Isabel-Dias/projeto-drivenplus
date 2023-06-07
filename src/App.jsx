@@ -1,16 +1,25 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { UserContext } from "./contexts/UserContext"
+import { useState } from "react"
 import LogInPage from "./pages/LogInPage/LogInPage"
 import SignInPage from "./pages/SignInPage/SignInPage"
-export default function App() {
+import SubscriptionsPage from "./pages/SubscriptionsPage/SubscriptionsPage"
+import HomePage from "./pages/HomePage/HomePage"
 
+export default function App() {
+  const [userData, setUserData] = useState("empty");
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LogInPage />} />
-          <Route path="/sign-up" element={<SignInPage />} />
-        </Routes>
-      </BrowserRouter>
+      <UserContext.Provider value={{userData, setUserData}}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<LogInPage />} />
+            <Route path="/sign-up" element={<SignInPage />} />
+            <Route path="/subscriptions" element={<SubscriptionsPage />}/>
+            <Route path="/home" element={<HomePage />} />
+          </Routes>
+        </BrowserRouter>
+      </UserContext.Provider>
     </>
   )
 }
