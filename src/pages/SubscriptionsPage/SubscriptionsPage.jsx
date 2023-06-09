@@ -17,12 +17,14 @@ export default function SubscriptionsPage() {
             }
 
             const promise = axios.get('https://mock-api.driven.com.br/api/v4/driven-plus/subscriptions/memberships', config)
-            promise.then(p => {setPlanOptions(p.data)})
+            promise.then(p => {
+                setPlanOptions(p.data)
+            })
             promise.catch(p => console.log(p.response.data.message))
         }
     }, [])
 
-    if (userData !== "empty" && userData !== null) {
+    if (userData !== "empty") {
 
         localStorage.setItem('User_Data', JSON.stringify(userData));
         console.log(userData)
@@ -41,5 +43,5 @@ export default function SubscriptionsPage() {
         );
     } else {
         return <Navigate to="/" />
-    }
+    } 
 }

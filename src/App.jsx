@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { UserContext } from "./contexts/UserContext"
+import { SelectedPlanContext } from "./contexts/SelectedPlanContext"
 import { useState } from "react"
 import LogInPage from "./pages/LogInPage/LogInPage"
 import SignInPage from "./pages/SignInPage/SignInPage"
@@ -9,10 +10,11 @@ import DrivenPlan from "./pages/DrivenPlan/DrivenPlan"
 
 export default function App() {
   const [userData, setUserData] = useState("empty");
+  const [selectedPlan, setSelectedPlan] = useState("empty");
 
   return (
     <>
-
+      <SelectedPlanContext.Provider value={{selectedPlan, setSelectedPlan}}>
       <UserContext.Provider value={{ userData, setUserData }}>
         <BrowserRouter>
           <Routes>
@@ -24,6 +26,7 @@ export default function App() {
           </Routes>
         </BrowserRouter>
       </UserContext.Provider>
+      </SelectedPlanContext.Provider>
 
     </>
   )

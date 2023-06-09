@@ -3,10 +3,13 @@ import styled from "styled-components";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { UserContext } from "../../contexts/UserContext";
+import { SelectedPlanContext } from "../../contexts/SelectedPlanContext";
+import logoHome from "../../assets/logo-home.png"
 
 export default function LogInPage() {
 
     const { userData, setUserData } = useContext(UserContext);
+    const { selectedPlan, setSelectedPlan } = useContext(SelectedPlanContext);
     const [email, setEmail] = useState('');
     const [password, setPasssword] = useState('');
     const navigate = useNavigate();
@@ -17,6 +20,7 @@ export default function LogInPage() {
     }
 
     useEffect(() => {
+
         const data = window.localStorage.getItem('User_Data');
         if (data !== null && data !== "empty") setUserData(JSON.parse(data));
     }, [])
@@ -48,8 +52,7 @@ export default function LogInPage() {
         return (
             <SCLogInPage>
                 <SCTopLogo>
-                    <p>Driven</p>
-                    <p>+</p>
+                    <img src={logoHome} alt="driven_plus_logo" />
                 </SCTopLogo>
                 <SCFormContainer>
                     <form onSubmit={logInAuth}>
@@ -59,7 +62,7 @@ export default function LogInPage() {
                     </form>
                 </SCFormContainer>
                 <Link to={"/sign-up"}>
-                    <p>Não Possui uma senha? Cadastre-se</p>
+                    <p>Não Possui uma conta? Cadastre-se</p>
                 </Link>
             </SCLogInPage>
         )
